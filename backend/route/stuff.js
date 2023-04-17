@@ -1,14 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
-const Thing = require('../model/thing');
+const auth = require('../middleware/auth')
+//attention à l'ordre multer doit être placé après auth, sinon l'auth le fera pas barrière
+const multer = require('../middleware/multer-config');
+
 const stuffCtrl = require('../controller/stuff')
 
-router.get('/', stuffCtrl.getAllStuff);
-router.post('/', stuffCtrl.createThing);
-router.get('/:id', stuffCtrl.getOneThing);
-router.put('/:id', stuffCtrl.modifyThing);
-router.delete('/:id', stuffCtrl.deleteThing);
+router.get('/', auth, stuffCtrl.getAllStuff);
+router.post('/', auth, multer, stuffCtrl.createThing);
+router.get('/:id', auth, stuffCtrl.getOneThing);
+router.put('/:id', auth, multer, stuffCtrl.modifyThing);
+router.delete('/:id', auth, stuffCtrl.deleteThing);
 
 module.exports = router;
 

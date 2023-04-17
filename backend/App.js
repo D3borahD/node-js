@@ -5,6 +5,8 @@ const Thing = require('./model/thing');
 
 const app = express();
 const stuffRoutes = require("./route/stuff.js");
+const userRoutes = require("./route/user.js");
+const path = require('path');
 
 
 mongoose.connect('mongodb://localhost:27017/test',
@@ -47,6 +49,8 @@ app.use((req, res, next) => {
     next();
 });
 app.use("/api/stuff", stuffRoutes);
+app.use("/api/auth", userRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 
 
