@@ -2,8 +2,17 @@ const express = require('express');
 const router = express.Router();
 
 const Thing = require('../model/thing');
+const stuffCtrl = require('../controller/stuff')
 
-router.post('/', (req, res, next) => {
+router.get('/', stuffCtrl.getAllStuff);
+router.post('/', stuffCtrl.createThing);
+router.get('/:id', stuffCtrl.getOneThing);
+router.put('/:id', stuffCtrl.modifyThing);
+router.delete('/:id', stuffCtrl.deleteThing);
+
+module.exports = router;
+
+/*router.post('/', (req, res, next) => {
     const thing = new Thing({
         title: req.body.title,
         description: req.body.description,
@@ -95,6 +104,6 @@ router.get('/' +
             });
         }
     );
-});
+});*/
 
 module.exports = router;
