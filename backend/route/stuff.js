@@ -1,6 +1,7 @@
-/*
 const express = require('express');
 const router = express.Router();
+
+const Thing = require('../model/thing');
 
 router.post('/', (req, res, next) => {
     const thing = new Thing({
@@ -97,4 +98,3 @@ router.get('/' +
 });
 
 module.exports = router;
-*/
